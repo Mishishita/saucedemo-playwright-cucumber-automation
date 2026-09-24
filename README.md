@@ -221,7 +221,7 @@ componentes de la automatización:
 - Cucumber Hooks: administran el ciclo de vida de Playwright.
 
 La estructura resultante es:
-
+```text
 Feature
    ↓
 Step Definitions
@@ -231,3 +231,4 @@ Page Objects
 Playwright
    ↓
 SauceDemo
+```

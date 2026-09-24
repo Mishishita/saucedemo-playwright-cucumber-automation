@@ -11,6 +11,7 @@ Feature: Gestión de productos en Sauce Demo
     When ingresa al carrito
     Then debería visualizar el producto en el carrito
 
+
     @TC05
   Scenario: TC05 - Completar una compra
     Given el usuario inicia sesión con "standard_user" y "secret_sauce"
@@ -19,4 +20,5 @@ Feature: Gestión de productos en Sauce Demo
     When inicia el proceso de checkout
     And completa la información de compra
     And continúa con el checkout
+    And finaliza la compra
     Then debería visualizar la confirmación de compra

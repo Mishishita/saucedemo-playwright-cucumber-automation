@@ -186,3 +186,48 @@ Durante el desarrollo, el navegador Chromium se configuró en modo visible (`hea
 
 También se utilizó `slowMo` durante la etapa de desarrollo para facilitar la depuración visual. Esta configuración puede reducirse o eliminarse para una ejecución de CI/CD.
 
+## Estrategia de automatización y patrones utilizados
+
+La estrategia de automatización combina Cucumber y Playwright, utilizando
+Gherkin para definir los escenarios de negocio y Java para implementar
+las pruebas automatizadas.
+
+### Patrones y principios utilizados
+
+**1. Page Object Model (POM)**
+
+Se utiliza el patrón Page Object Model para encapsular los elementos
+(locators) y las acciones correspondientes a cada página de SauceDemo.
+
+Los Page Objects implementados son:
+
+- LoginPage
+- ProductPage
+- CheckoutPage
+- CheckoutOverviewPage
+- CompletePage
+
+Esto permite separar la interacción con la interfaz de la lógica de los
+escenarios y facilita el mantenimiento de los locators.
+
+**2. Separation of Concerns**
+
+Se aplica una separación de responsabilidades entre los diferentes
+componentes de la automatización:
+
+- Feature Files: describen los escenarios en lenguaje Gherkin.
+- Step Definitions: traducen los pasos Gherkin a acciones ejecutables.
+- Page Objects: encapsulan la interacción con la interfaz.
+- Cucumber Hooks: administran el ciclo de vida de Playwright.
+
+La estructura resultante es:
+
+Feature
+   ↓
+Step Definitions
+   ↓
+Page Objects
+   ↓
+Playwright
+   ↓
+SauceDemo

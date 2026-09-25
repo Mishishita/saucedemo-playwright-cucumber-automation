@@ -179,6 +179,8 @@ Errors: 0
 Skipped: 0
 BUILD SUCCESS
 ```
+**Reporte HTML de Playwright:**  
+https://mishishita.github.io/saucedemo-playwright-cucumber-automation
 
 ## Consideraciones
 

@@ -8,9 +8,10 @@ import com.microsoft.playwright.Playwright;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 
 public class CucumberHooks {
-    
+
     protected static Playwright playwright;
     protected static Browser browser;
     protected static BrowserContext context;
@@ -21,10 +22,10 @@ public class CucumberHooks {
 
         playwright = Playwright.create();
 
-        
         browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
-        //Para que se un poco lenta y pueda ver las acciones
-        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(500));
+        // Para que se un poco lenta y pueda ver las acciones
+        // browser = playwright.chromium().launch(new
+        // BrowserType.LaunchOptions().setHeadless(false).setSlowMo(500));
 
         context = browser.newContext();
 
@@ -32,19 +33,20 @@ public class CucumberHooks {
     }
 
     @After
-    public void tearDown() {
+    public void tearDown(Scenario scenario) {
 
-        if (context != null) {
-            context.close();
-        }
+        byte[] screenshot = page.screenshot(
+                new Page.ScreenshotOptions()
+                        .setFullPage(true));
 
-        if (browser != null) {
-            browser.close();
-        }
+        scenario.attach(
+                screenshot,
+                "image/png",
+                scenario.getName());
 
-        if (playwright != null) {
-            playwright.close();
-        }
+        context.close();
+        browser.close();
+        playwright.close();
     }
 
     public static Page getPage() {
